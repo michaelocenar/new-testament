@@ -16,7 +16,7 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input[type=text], textarea, button {
+input[type=text], textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -30,6 +30,10 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 button:hover {
@@ -63,5 +67,12 @@ button:hover {
 
   h1 {
     font-size: 1.5em;
+  }
+}
+
+@media (min-width: 601px) {
+  button {
+    width: auto;
+    display: inline-block;
   }
 }
