@@ -25,7 +25,7 @@ const correctBooks = {
   "2 john": ["2 john", "2 jn", "2jn"],
   "3 john": ["3 john", "3 jn", "3jn"],
   "jude": ["jude", "jd", "jde"],
-  "revelation": ["revelation", "rev", "re"]
+  "revelation": ["revelation", "rev", "re", "apocalypse"],
 };
 
 let userBooks = [];
