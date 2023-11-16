@@ -98,3 +98,12 @@ button:hover {
     display: inline-block;
   }
 }
+
+.hard-mode-btn {
+  background-color: #d9534f; /* Red color for Hard Mode */
+  color: white;
+}
+
+.hard-mode-btn:hover {
+  background-color: #c9302c; /* Darker red on hover */
+}

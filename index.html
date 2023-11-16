@@ -8,9 +8,8 @@
 <body>
     <div id="app">
         <h1>New Testament Book Quiz</h1>
-        <img src="Screenshot 2023-11-16 192406.jpg" alt="Quiz Image" style="max-width:50%; height:auto;">
-        <p>Welcome to the New Testament Book Quiz! Enter the names of books from the New Testament one at a time. When you're ready, click 'Submit' to see how many you got right and which ones you missed. Remember, duplicate entries are not allowed!</p>
-        <button id="hardMode">Hard Mode</button>
+        <p>Welcome to the New Testament Book Quiz! Enter the names of books from the New Testament one at a time. Click 'Submit' to see your results. In Easy Mode, take your time to answer. In Hard Mode, you have 60 seconds and lose a point for incorrect guesses!</p>
+        <button id="modeToggle" class="hard-mode-btn">Switch to Hard Mode</button>
         <div id="timer" style="display:none;">Time left: <span id="timeLeft">60</span> seconds</div>
         <input type="text" id="bookInput" placeholder="Enter a book...">
         <button id="addBook">Add Book</button>
@@ -21,5 +20,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-

@@ -29,7 +29,7 @@ const correctBooks = {
 };
 
 let userBooks = [];
-let hardMode = false;
+let mode = 'easy'; // Default mode
 let timer;
 let wrongGuesses = 0;
 
@@ -44,11 +44,26 @@ document.getElementById('addBook').addEventListener('click', addBook);
 
 document.getElementById('submit').addEventListener('click', submitQuiz);
 
-document.getElementById('hardMode').addEventListener('click', function() {
-    hardMode = true;
-    document.getElementById('timer').style.display = 'block';
-    startTimer();
-});
+document.getElementById('modeToggle').addEventListener('click', toggleMode);
+
+function toggleMode() {
+    if (mode === 'easy') {
+        mode = 'hard';
+        document.getElementById('timer').style.display = 'block';
+        document.getElementById('modeToggle').textContent = 'Switch to Easy Mode';
+        document.getElementById('modeToggle').classList.remove('hard-mode-btn');
+        startTimer();
+    } else {
+        mode = 'easy';
+        document.getElementById('timer').style.display = 'none';
+        document.getElementById('modeToggle').textContent = 'Switch to Hard Mode';
+        document.getElementById('modeToggle').classList.add('hard-mode-btn');
+        if (timer) {
+            clearInterval(timer);
+        }
+    }
+}
+
 
 function addBook() {
     const bookInput = document.getElementById('bookInput').value.toLowerCase().trim();
@@ -72,6 +87,11 @@ function addBook() {
             wrongGuesses++;
         }
     }
+
+    if (mode === 'hard' && userBooks.length === 1) {
+      startTimer();
+  }
+
 
     if (hardMode && userBooks.length === 1) {
         startTimer();
