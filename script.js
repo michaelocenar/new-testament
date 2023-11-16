@@ -31,6 +31,7 @@ const correctBooks = {
 let userBooks = [];
 let hardMode = false;
 let timer;
+let wrongGuesses = 0;
 
 document.getElementById('bookInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
@@ -67,6 +68,9 @@ function addBook() {
     }
     if (!validBook) {
         alert("That isn't an actual book of the New Testament.");
+        if (hardMode) {
+            wrongGuesses++;
+        }
     }
 
     if (hardMode && userBooks.length === 1) {
@@ -75,12 +79,13 @@ function addBook() {
 }
 
 function submitQuiz() {
-    if (userBooks.length === 0) {
+    if (userBooks.length === 0 && !hardMode) {
         alert("Please input at least one book before submitting.");
         return;
     }
     const totalBooks = Object.keys(correctBooks).length;
-    const score = userBooks.length;
+    let score = userBooks.length - wrongGuesses;
+    score = Math.max(score, 0); // Ensure score doesn't go below 0
     let missedBooks = Object.keys(correctBooks).filter(book => !userBooks.includes(book));
     
     let resultHTML = `<p>Your Score: ${score}/${totalBooks}</p>`;
@@ -93,6 +98,7 @@ function submitQuiz() {
         clearInterval(timer);
         hardMode = false;
         document.getElementById('timer').style.display = 'none';
+        wrongGuesses = 0; // Reset wrong guesses for the next round
     }
 }
 
