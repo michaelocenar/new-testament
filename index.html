@@ -9,8 +9,10 @@
     <div id="app">
         <h1>New Testament Book Quiz</h1>
         <p>Welcome to the New Testament Book Quiz! Enter the names of books from the New Testament one at a time. Click 'Submit' to see your results. In Easy Mode, take your time to answer. In Hard Mode, you have 60 seconds and lose a point for incorrect guesses!</p>
-        <img src="Screenshot 2023-11-16 192406.jpg" alt="Quiz Image" style="max-width:50%; height:auto;">
-        <button id="modeToggle" class="hard-mode-btn">Switch to Hard Mode</button>
+        <div class="mode-toggle-container">
+            <img src="Screenshot 2023-11-16 192406.jpg" alt="Quiz Image" class="quiz-image">
+            <button id="modeToggle" class="hard-mode-btn">Switch to Hard Mode</button>
+        </div>
         <div id="timer" style="display:none;">Time left: <span id="timeLeft">60</span> seconds</div>
         <input type="text" id="bookInput" placeholder="Enter a book...">
         <button id="addBook">Add Book</button>
