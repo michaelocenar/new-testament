@@ -46,10 +46,7 @@ document.getElementById('submit').addEventListener('click', submitQuiz);
 
 document.getElementById('modeToggle').addEventListener('click', toggleMode);
 
-document.getElementById('restart').addEventListener('click', restartGame);
-
-
-const toggleMode = () => {
+function toggleMode() {
     if (mode === 'easy') {
         mode = 'hard';
         document.getElementById('timer').style.display = 'block';
@@ -67,7 +64,8 @@ const toggleMode = () => {
     }
 }
 
-const addBook = () => {
+
+function addBook() {
     const bookInput = document.getElementById('bookInput').value.toLowerCase().trim();
     if (userBooks.includes(bookInput)) {
         alert("You have already inputted this book.");
@@ -99,10 +97,8 @@ const addBook = () => {
         startTimer();
     }
 }
-const submitQuiz = () => {
-    if (timer) {
-      clearInterval(timer);
-    }
+
+function submitQuiz() {
     if (userBooks.length === 0 && !hardMode) {
         alert("Please input at least one book before submitting.");
         return;
@@ -125,7 +121,8 @@ const submitQuiz = () => {
         wrongGuesses = 0; // Reset wrong guesses for the next round
     }
 }
-const startTimer = () => {
+
+function startTimer() {
     let timeLeft = 60;
     document.getElementById('timeLeft').textContent = timeLeft;
     timer = setInterval(function() {
@@ -138,23 +135,11 @@ const startTimer = () => {
     }, 1000);
 }
 
-const updateEnteredBooks = () => {
+function updateEnteredBooks() {
     let html = userBooks.map(book => `<span class="book">${capitalize(book)}</span>`).join("");
     document.getElementById('enteredBooks').innerHTML = html;
 }
 
-const capitalize = (str) => {
+function capitalize(str) {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-}
-
-const restartGame = () => {
-  userBooks = [];
-  wrongGuesses = 0;
-  if (mode === 'hard' && timer) {
-      clearInterval(timer);
-      document.getElementById('timer').style.display = 'none';
-  }
-  document.getElementById('enteredBooks').innerHTML = '';
-  document.getElementById('result').innerHTML = '';
-  document.getElementById('bookInput').value = '';
 }
