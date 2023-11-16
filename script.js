@@ -29,6 +29,8 @@ const correctBooks = {
 };
 
 let userBooks = [];
+let hardMode = false;
+let timer;
 
 document.getElementById('bookInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
@@ -39,20 +41,12 @@ document.getElementById('bookInput').addEventListener('keypress', function(event
 
 document.getElementById('addBook').addEventListener('click', addBook);
 
-document.getElementById('submit').addEventListener('click', function() {
-    if (userBooks.length === 0) {
-        alert("Please input at least one book before submitting.");
-        return;
-    }
-    const totalBooks = Object.keys(correctBooks).length;
-    const score = userBooks.length;
-    let missedBooks = Object.keys(correctBooks).filter(book => !userBooks.includes(book));
-    
-    let resultHTML = `<p>Your Score: ${score}/${totalBooks}</p>`;
-    resultHTML += `<p>Books you entered: ${userBooks.map(book => capitalize(book)).join(", ")}</p>`;
-    resultHTML += `<p>Books you missed: ${missedBooks.map(book => capitalize(book)).join(", ")}</p>`;
+document.getElementById('submit').addEventListener('click', submitQuiz);
 
-    document.getElementById('result').innerHTML = resultHTML;
+document.getElementById('hardMode').addEventListener('click', function() {
+    hardMode = true;
+    document.getElementById('timer').style.display = 'block';
+    startTimer();
 });
 
 function addBook() {
@@ -74,6 +68,45 @@ function addBook() {
     if (!validBook) {
         alert("That isn't an actual book of the New Testament.");
     }
+
+    if (hardMode && userBooks.length === 1) {
+        startTimer();
+    }
+}
+
+function submitQuiz() {
+    if (userBooks.length === 0) {
+        alert("Please input at least one book before submitting.");
+        return;
+    }
+    const totalBooks = Object.keys(correctBooks).length;
+    const score = userBooks.length;
+    let missedBooks = Object.keys(correctBooks).filter(book => !userBooks.includes(book));
+    
+    let resultHTML = `<p>Your Score: ${score}/${totalBooks}</p>`;
+    resultHTML += `<p>Books you entered: ${userBooks.map(book => capitalize(book)).join(", ")}</p>`;
+    resultHTML += `<p>Books you missed: ${missedBooks.map(book => capitalize(book)).join(", ")}</p>`;
+
+    document.getElementById('result').innerHTML = resultHTML;
+
+    if (hardMode) {
+        clearInterval(timer);
+        hardMode = false;
+        document.getElementById('timer').style.display = 'none';
+    }
+}
+
+function startTimer() {
+    let timeLeft = 60;
+    document.getElementById('timeLeft').textContent = timeLeft;
+    timer = setInterval(function() {
+        timeLeft--;
+        document.getElementById('timeLeft').textContent = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            submitQuiz();
+        }
+    }, 1000);
 }
 
 function updateEnteredBooks() {
