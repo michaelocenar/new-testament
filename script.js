@@ -40,6 +40,10 @@ document.getElementById('bookInput').addEventListener('keypress', function(event
 document.getElementById('addBook').addEventListener('click', addBook);
 
 document.getElementById('submit').addEventListener('click', function() {
+    if (userBooks.length === 0) {
+        alert("Please input at least one book before submitting.");
+        return;
+    }
     const totalBooks = Object.keys(correctBooks).length;
     const score = userBooks.length;
     let missedBooks = Object.keys(correctBooks).filter(book => !userBooks.includes(book));
@@ -53,9 +57,13 @@ document.getElementById('submit').addEventListener('click', function() {
 
 function addBook() {
     const bookInput = document.getElementById('bookInput').value.toLowerCase().trim();
+    if (userBooks.includes(bookInput)) {
+        alert("You have already inputted this book.");
+        return;
+    }
     let validBook = false;
     for (let book in correctBooks) {
-        if (correctBooks[book].includes(bookInput) && !userBooks.includes(book)) {
+        if (correctBooks[book].includes(bookInput)) {
             userBooks.push(book);
             updateEnteredBooks();
             document.getElementById('bookInput').value = '';
