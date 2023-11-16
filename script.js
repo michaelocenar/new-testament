@@ -34,14 +34,10 @@ let timer;
 let wrongGuesses = 0;
 
 document.getElementById('bookInput').addEventListener('keypress', function(event) {
-  if (event.key === 'Enter') {
-      event.preventDefault();
-      if (this.value.trim() === '') {
-          submitQuiz();
-      } else {
-          addBook();
-      }
-  }
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        addBook();
+    }
 });
 
 document.getElementById('addBook').addEventListener('click', addBook);
