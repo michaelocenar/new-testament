@@ -32,13 +32,18 @@ let userBooks = [];
 
 document.getElementById('addBook').addEventListener('click', function() {
   const bookInput = document.getElementById('bookInput').value.toLowerCase().trim();
+  let validBook = false;
   for (let book in correctBooks) {
       if (correctBooks[book].includes(bookInput) && !userBooks.includes(book)) {
           userBooks.push(book);
           updateEnteredBooks();
           document.getElementById('bookInput').value = '';
+          validBook = true;
           break;
       }
+  }
+  if (!validBook) {
+      alert("That isn't an actual book of the New Testament.");
   }
 });
 
@@ -48,14 +53,17 @@ document.getElementById('submit').addEventListener('click', function() {
   let missedBooks = Object.keys(correctBooks).filter(book => !userBooks.includes(book));
   
   let resultHTML = `<p>Your Score: ${score}/${totalBooks}</p>`;
-  resultHTML += `<p>Books you entered: ${userBooks.join(", ")}</p>`;
-  resultHTML += `<p>Books you missed: ${missedBooks.join(", ")}</p>`;
+  resultHTML += `<p>Books you entered: ${userBooks.map(book => capitalize(book)).join(", ")}</p>`;
+  resultHTML += `<p>Books you missed: ${missedBooks.map(book => capitalize(book)).join(", ")}</p>`;
 
   document.getElementById('result').innerHTML = resultHTML;
 });
 
 function updateEnteredBooks() {
-  let html = userBooks.map(book => `<span class="book">${book}</span>`).join("");
+  let html = userBooks.map(book => `<span class="book">${capitalize(book)}</span>`).join("");
   document.getElementById('enteredBooks').innerHTML = html;
 }
 
+function capitalize(str) {
+  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
