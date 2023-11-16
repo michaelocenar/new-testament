@@ -1,17 +1,48 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
+  background-color: #f0f0f0;
 }
 
 #app {
-  margin: 20px;
+  background-color: white;
+  margin: 40px auto;
+  padding: 20px;
+  width: 60%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
 }
 
-textarea {
-  width: 300px;
-  height: 150px;
+input[type=text] {
+  width: 60%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 4px;
 }
 
-#result {
-  margin-top: 20px;
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#enteredBooks {
+  margin-bottom: 20px;
+}
+
+.book {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px;
+  background-color: #e7e7e7;
+  border-radius: 4px;
 }
