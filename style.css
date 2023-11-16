@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#app {
+  margin: 20px;
+}
+
+textarea {
+  width: 300px;
+  height: 150px;
+}
+
+#result {
+  margin-top: 20px;
+}
