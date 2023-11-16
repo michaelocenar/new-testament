@@ -46,7 +46,10 @@ document.getElementById('submit').addEventListener('click', submitQuiz);
 
 document.getElementById('modeToggle').addEventListener('click', toggleMode);
 
-function toggleMode() {
+document.getElementById('restart').addEventListener('click', restartGame);
+
+
+const toggleMode = () => {
     if (mode === 'easy') {
         mode = 'hard';
         document.getElementById('timer').style.display = 'block';
@@ -64,8 +67,7 @@ function toggleMode() {
     }
 }
 
-
-function addBook() {
+const addBook = () => {
     const bookInput = document.getElementById('bookInput').value.toLowerCase().trim();
     if (userBooks.includes(bookInput)) {
         alert("You have already inputted this book.");
@@ -97,8 +99,10 @@ function addBook() {
         startTimer();
     }
 }
-
-function submitQuiz() {
+const submitQuiz = () => {
+    if (timer) {
+      clearInterval(timer);
+    }
     if (userBooks.length === 0 && !hardMode) {
         alert("Please input at least one book before submitting.");
         return;
@@ -121,8 +125,7 @@ function submitQuiz() {
         wrongGuesses = 0; // Reset wrong guesses for the next round
     }
 }
-
-function startTimer() {
+const startTimer = () => {
     let timeLeft = 60;
     document.getElementById('timeLeft').textContent = timeLeft;
     timer = setInterval(function() {
@@ -135,11 +138,23 @@ function startTimer() {
     }, 1000);
 }
 
-function updateEnteredBooks() {
+const updateEnteredBooks = () => {
     let html = userBooks.map(book => `<span class="book">${capitalize(book)}</span>`).join("");
     document.getElementById('enteredBooks').innerHTML = html;
 }
 
-function capitalize(str) {
+const capitalize = (str) => {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+
+const restartGame = () => {
+  userBooks = [];
+  wrongGuesses = 0;
+  if (mode === 'hard' && timer) {
+      clearInterval(timer);
+      document.getElementById('timer').style.display = 'none';
+  }
+  document.getElementById('enteredBooks').innerHTML = '';
+  document.getElementById('result').innerHTML = '';
+  document.getElementById('bookInput').value = '';
 }
